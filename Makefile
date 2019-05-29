@@ -1,17 +1,20 @@
-WITH_ENV = env `cat .env 2>/dev/null | xargs`
-
-
-install-deps:
-	@$(MAKE) pip
-
-pre-commit:
-	@cp ./scripts/pre-commit .git/hooks/
-
 pip:
-	@make pre-commit
-	@pip --default-timeout=100 --retries=5 install -r requirements/requirement.txt
-	@pip --default-timeout=100 --retries=5 install -r requirements/requirement-dev.txt
-	@pip --default-timeout=100 --retries=5 install -r requirements/requirement-test.txt
+	@$(MAKE) prod
+	@$(MAKE) dev
+
+prod:
+	@pip install -U pip
+	@pip install -r requirements/requirement.txt
+	@pip install -r requirements/requirement-govern.txt
+
+dev:
+	@pip install -r requirements/requirement-test.txt
+	@pip install -r requirements/requirement-dev.txt
+	@pre-commit install
 
 lint:
 	@sh scripts/check_lint.sh
+
+clean:
+	@find . -name '__pycache__' -type d -exec rm -rf {} +
+	@rm -rf logs htmlcov .pytest_cache

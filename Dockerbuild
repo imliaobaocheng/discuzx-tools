@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 docker_name=wujuguang/service:dockers
-docker_dir=/home/kylin/Luntan/service-quant
-local_dir=/home/kylin/Luntan/service-quant
+docker_dir=/home/kylin/Luntan/discuzx-tools
+local_dir=/home/kylin/Luntan/discuzx-tools
 
 docker build -t="${docker_name}" ./
 

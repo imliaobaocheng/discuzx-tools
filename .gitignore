@@ -66,6 +66,8 @@ target/
 # PyCharm
 .idea
 .env
+.DS_Store
+ignore/*
 
 # Mine
 kylin_*
